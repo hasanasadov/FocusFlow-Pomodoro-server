@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  webapi:
+    build: 
+      context: .
+      dockerfile: WebAPI/Dockerfile 
+    image: pomdoro-webapi:latest
+    depends_on:
+      - redis
+    networks:
+      - pomodoro_net
+
+  redis:
+    image: redis:latest
+    networks:
+      - pomodoro_net
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
